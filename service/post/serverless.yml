@@ -1,0 +1,66 @@
+service: fullstack-lambda-post
+
+package:
+  individually: true
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-plugin-monorepo
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: ap-northeast-2
+      
+  role:
+    Fn::GetAtt: [ "FullStackToyRole", "Arn" ]
+
+  environment:
+    TABLENAME: ${self:custom.stage}-fullstackToy
+    REGION: ${self:provider.region}
+    INVERTINDEX: InvertedIndex
+    MODELINDEX: ModelIndex
+    GSI1INDEX: GSI1Index
+
+
+custom:
+  webpack:
+    webpackConfig: ../../webpack.config.js
+    includeModules: true
+    forceExclude: 
+      - aws-sdk
+    
+  stage: ${opt:stage, self:provider.stage}
+
+functions:
+  putPost:
+    handler: src/handler.putPostHandler
+    events:
+      - http:
+          path: 'putPost'
+          method: post
+          cors: true
+
+  getPostByUser:
+    handler: src/handler.getPostByUserHandler
+    events:
+      - http:
+          path: 'getPostByUser'
+          method: get
+          cors: true
+
+  getPostByTime:
+    handler: src/handler.getPostByTimeHandler
+    events:
+      - http:
+          path: 'getPostByTime'
+          method: get
+          cors: true
+
+resources:
+  # GateWay Error
+  - ${file(../resources/lambdaResources/api-gateway-error.yml)}
+  # Role
+  - ${file(../resources/lambdaResources/roles.yml)}

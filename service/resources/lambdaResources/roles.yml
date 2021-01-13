@@ -1,0 +1,61 @@
+Resources:
+  FullStackToyRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /fullstackToy/
+      RoleName: FullStackToyRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: fullstackToyDBPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:DescribeTable
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItemßs
+                  - dynamodb:DeleteItem
+                  - dynamodb:BatchWriteItem
+                Resource:
+                  - 'Fn::Join':
+                    - ':'
+                    -
+                      - 'arn:aws:dynamodb'
+                      - Ref: 'AWS::Region'
+                      - Ref: 'AWS::AccountId'
+                      - table/${self:provider.environment.TABLENAME}
+                  - 'Fn::Join':
+                    - ':'
+                    -
+                      - 'arn:aws:dynamodb'
+                      - Ref: 'AWS::Region'
+                      - Ref: 'AWS::AccountId'
+                      - table/${self:provider.environment.TABLENAME}/index/*
+        - PolicyName: fullstackToyCWPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource:
+                  - 'Fn::Join':
+                    - ':'
+                    -
+                      - 'arn:aws:logs'
+                      - Ref: 'AWS::Region'
+                      - Ref: 'AWS::AccountId'
+                      - 'log-group:/aws/lambda/*:*:*'

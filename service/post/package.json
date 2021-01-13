@@ -1,0 +1,18 @@
+{
+  "name": "@lambda/post",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@middy/core": "^1.5.1",
+    "@middy/validator": "^1.5.1",
+    "@lambda/libs": "1.0.0",
+    "@lambda/middlewares": "1.0.0"
+  }
+}
