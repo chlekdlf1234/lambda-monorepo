@@ -6,15 +6,15 @@ interface IParams {
   text: string;
 }
 
-export const putPost = async ({ userId, title, text }: IParams) => {
+export default async ({ userId, title, text }: IParams) => {
   try {
     const putTime: string = new Date().toISOString();
 
     const postItem = {
-      PK: 'POST#' + userId,
-      SK: 'POST#' + title + '#' + putTime,
+      PK: `POST#${userId}`,
+      SK: `POST#${title}#${putTime}`,
       point: 0,
-      creatorId: 'USER#' + userId,
+      creatorId: `USER#${userId}`,
       title,
       text,
       model: 'post',

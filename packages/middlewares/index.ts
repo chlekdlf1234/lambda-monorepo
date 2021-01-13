@@ -1,4 +1,4 @@
-import { buildRequest } from './buildRequest';
-import { buildResponse } from './buildResponse';
+import buildRequest from './buildRequest';
+import buildResponse from './buildResponse';
 
 export { buildRequest, buildResponse };

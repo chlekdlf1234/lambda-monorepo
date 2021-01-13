@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import middy from '@middy/core';
 
 interface IResponse {
@@ -10,15 +11,13 @@ const DEFAULT_HEADERS = {
   'Access-Control-Allow-Credentials': true,
 };
 
-const buildErrorResponse = (error: Error): IResponse => {
-  return {
-    statusCode: 500,
-    headers: DEFAULT_HEADERS,
-    body: JSON.stringify({
-      message: error.message,
-    }),
-  };
-};
+const buildErrorResponse = (error: Error): IResponse => ({
+  statusCode: 500,
+  headers: DEFAULT_HEADERS,
+  body: JSON.stringify({
+    message: error.message,
+  }),
+});
 
 const buildJSONResponse = (response?: IResponse): IResponse => {
   if (!response) {
@@ -55,13 +54,15 @@ const buildJSONResponse = (response?: IResponse): IResponse => {
   };
 };
 
-export const buildResponse = () => ({
+export default () => ({
   after(handler: middy.HandlerLambda, next: middy.NextFunction) {
+    // eslint-disable-next-line no-param-reassign
     handler.response = buildJSONResponse(handler.response);
     return next();
   },
 
   onError(handler: middy.HandlerLambda, next: middy.NextFunction) {
+    // eslint-disable-next-line no-param-reassign
     handler.response = buildErrorResponse(handler.error);
     return next();
   },

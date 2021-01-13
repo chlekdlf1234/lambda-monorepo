@@ -1,8 +1,5 @@
 module.exports = {
-  extends: [
-    'prettier/@typescript-eslint', 
-    'plugin:prettier/recommended', 
-  ],
+  extends: ['prettier/@typescript-eslint', 'plugin:prettier/recommended', 'airbnb-typescript/base', "prettier"],
   env: {
     node: true,
   },
@@ -17,12 +14,13 @@ module.exports = {
     },
   },
   parserOptions: {
-    project: './tsconfig.json',
+    project: ['./tsconfig.json'],
     tsconfigRootDir: __dirname,
     sourceType: 'module',
     ecmaVersion: 2019,
   },
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
+    "max-len": 0
   },
 };

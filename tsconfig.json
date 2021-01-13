@@ -29,7 +29,7 @@
     },
     "include": [
         "service/**/*.ts", 
-        "packages/**/*.ts"
+        "packages/**/*.ts",
    ],
     "exclude": [
         "node_modules/**/*",

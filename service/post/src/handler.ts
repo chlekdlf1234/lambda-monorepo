@@ -1,14 +1,14 @@
 import middy from '@middy/core';
 import validator from '@middy/validator';
 
-import { buildRequest } from '../../../packages/middlewares/buildRequest';
-import { buildResponse } from '../../../packages/middlewares/buildResponse';
+import buildRequest from '../../../packages/middlewares/buildRequest';
+import buildResponse from '../../../packages/middlewares/buildResponse';
 
 import { INormalizedEvent } from '../../types';
 
-import { getPostByUser } from './getPostByUser';
-import { getPostByTime } from './getPostByTime';
-import { putPost } from './putPost';
+import getPostByUser from './getPostByUser';
+import getPostByTime from './getPostByTime';
+import putPost from './putPost';
 
 import { getPostByTimeSchema, getPostByUserSchema, putPostSchema } from '../inputSchema';
 
@@ -25,25 +25,22 @@ interface IGetByTimeEvent extends INormalizedEvent {
   };
 }
 
-const putPostFn = async (event: IPutEvent) => {
-  return putPost({
+const putPostFn = async (event: IPutEvent) =>
+  putPost({
     userId: event.requestContext.identity.cognitoIdentityId!,
     title: event.body.title,
     text: event.body.text,
   });
-};
 
-const getPostByUserFn = async (event: INormalizedEvent) => {
-  return getPostByUser({
+const getPostByUserFn = async (event: INormalizedEvent) =>
+  getPostByUser({
     userId: event.requestContext.identity.cognitoIdentityId!,
   });
-};
 
-const getPostByTimeFn = async (event: IGetByTimeEvent) => {
-  return getPostByTime({
+const getPostByTimeFn = async (event: IGetByTimeEvent) =>
+  getPostByTime({
     time: event.body.time,
   });
-};
 
 export const putPostHandler = middy(putPostFn)
   .use(buildRequest())

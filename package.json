@@ -1,11 +1,11 @@
 {
-  "name": "fullstack-lambda",
-  "version": "2.2.0",
-  "description": "A Node.js starter for Serverless Framework with ES6 and TypeScript support",
+  "name": "lambda-monorepo",
+  "version": "1.0.0",
+  "description": "A serverless monorepo boilerplate with webpack and typescript",
   "main": "handler.js",
   "private": true,
   "scripts": {
-    "lint": "eslint . --ext js,ts --cache --fix",
+    "lint": "eslint . --ext js,ts --fix",
     "prettier": "prettier --list-different './**/*.{js,ts}'",
     "typecheck": "tsc --noEmit"
   },
@@ -26,7 +26,10 @@
     "@typescript-eslint/parser": "^4.12.0",
     "aws-sdk": "^2.823.0",
     "eslint": "^7.17.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-config-prettier": "^7.1.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1",
     "serverless-bundle": "3.2.0",

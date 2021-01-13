@@ -4,14 +4,14 @@ interface IParams {
   userId: string;
 }
 
-export const getPostByUser = async ({ userId }: IParams) => {
+export default async ({ userId }: IParams) => {
   try {
     const postsByUser = (
       await dynamoDB.query({
         TableName: process.env.TABLENAME!,
         KeyConditionExpression: 'PK = :postId',
         ExpressionAttributeValues: {
-          ':postId': 'POST#' + userId,
+          ':postId': `POST#${userId}`,
         },
       })
     ).Items;
