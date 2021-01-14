@@ -11,7 +11,19 @@ export default class DDB {
   }
 
   static put(param: DynamoDB.DocumentClient.PutItemInput): Promise<DynamoDB.DocumentClient.PutItemOutput> {
-    return dynamoDB.put(param).promise();
+    const putTime: string = new Date().toISOString();
+
+    const Item = Object.assign(param.Item, {
+      createdAt: putTime,
+      updatedAt: putTime,
+    });
+
+    const amendedParam = {
+      ...param,
+      Item,
+    };
+
+    return dynamoDB.put(amendedParam).promise();
   }
 
   static scan(param: DynamoDB.DocumentClient.ScanInput): Promise<DynamoDB.DocumentClient.ScanOutput> {
@@ -27,6 +39,15 @@ export default class DDB {
   }
 
   static update(param: DynamoDB.DocumentClient.UpdateItemInput): Promise<DynamoDB.DocumentClient.UpdateItemOutput> {
-    return dynamoDB.update(param).promise();
+    const UpdateExpression = param.UpdateExpression?.concat(', updatedAt = :updatedAt');
+    const ExpressionAttributeValues = { ':updatedAt': new Date().toISOString(), ...param.ExpressionAttributeValues };
+
+    const amendedParam = {
+      ...param,
+      UpdateExpression,
+      ExpressionAttributeValues,
+    };
+
+    return dynamoDB.update(amendedParam).promise();
   }
 }
