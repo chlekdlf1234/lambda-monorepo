@@ -22,6 +22,6 @@ export default async ({ time }: IParams) => {
 
     return postByTime;
   } catch (error) {
-    throw new Error('get post by time failed');
+    throw new Error(`GET POST BY TIME/${error}`);
   }
 };

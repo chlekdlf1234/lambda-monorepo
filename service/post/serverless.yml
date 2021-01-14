@@ -35,6 +35,22 @@ custom:
   stage: ${opt:stage, self:provider.stage}
 
 functions:
+  updatePost:
+    handler: src/handler.updatePostHandler
+    events:
+      - http:
+          path: 'updatePost'
+          method: post
+          cors: true
+
+  deletePost:
+    handler: src/handler.deletePostHandler
+    events:
+      - http:
+          path: 'deletePost'
+          method: post
+          cors: true
+
   putPost:
     handler: src/handler.putPostHandler
     events:
@@ -56,6 +72,14 @@ functions:
     events:
       - http:
           path: 'getPostByTime'
+          method: get
+          cors: true
+
+  getPostByPostId:
+    handler: src/handler.getPostByPostIdHandler
+    events:
+      - http:
+          path: 'getPostByPostId'
           method: get
           cors: true
 

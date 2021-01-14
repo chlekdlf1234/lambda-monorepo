@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import { DynamoDB } from 'aws-sdk';
+import { DynamoDB } from 'aws-sdk'; // eslint-disable-line
 
 const dynamoDB: DynamoDB.DocumentClient = new DynamoDB.DocumentClient({
   convertEmptyValues: true,

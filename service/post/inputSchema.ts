@@ -1,3 +1,55 @@
+export const updatePostSchema = {
+  type: 'object',
+  properties: {
+    body: {
+      type: 'object',
+      properties: {
+        postId: { type: 'string' },
+        title: { type: 'string' },
+        text: { type: 'string' },
+      },
+      required: ['postId', 'title', 'text'],
+    },
+    requestContext: {
+      type: 'object',
+      properties: {
+        identity: {
+          type: 'object',
+          properties: {
+            cognitoIdentityId: { type: 'string' },
+          },
+          required: ['cognitoIdentityId'],
+        },
+      },
+    },
+  },
+};
+
+export const deletePostSchema = {
+  type: 'object',
+  properties: {
+    body: {
+      type: 'object',
+      properties: {
+        postId: { type: 'string' },
+      },
+      required: ['postId'],
+    },
+    requestContext: {
+      type: 'object',
+      properties: {
+        identity: {
+          type: 'object',
+          properties: {
+            cognitoIdentityId: { type: 'string' },
+          },
+          required: ['cognitoIdentityId'],
+        },
+      },
+    },
+  },
+};
+
 export const putPostSchema = {
   type: 'object',
   properties: {
@@ -49,6 +101,19 @@ export const getPostByTimeSchema = {
       properties: {
         time: { type: 'string' },
       },
+    },
+  },
+};
+
+export const getPostByPostIdSchema = {
+  type: 'object',
+  properties: {
+    body: {
+      type: 'object',
+      properties: {
+        postId: { type: 'string' },
+      },
+      required: ['postId'],
     },
   },
 };

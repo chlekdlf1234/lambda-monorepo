@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-import middy from '@middy/core';
+import middy from '@middy/core'; // eslint-disable-line
 
 interface IResponse {
   statusCode?: number;

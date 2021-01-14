@@ -18,6 +18,6 @@ export default async ({ userId }: IParams) => {
 
     return postsByUser;
   } catch (error) {
-    throw new Error('get post by user failed');
+    throw new Error(`GET POST BY USER/${error}`);
   }
 };

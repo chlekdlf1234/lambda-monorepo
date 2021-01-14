@@ -1,12 +1,10 @@
-// eslint-disable-next-line
-import middy from '@middy/core';
-import { APIGatewayProxyEvent } from 'aws-lambda';
+import middy from '@middy/core'; // eslint-disable-line
+import { APIGatewayProxyEvent } from 'aws-lambda'; // eslint-disable-line
 
 const parseJSONBody = (event: APIGatewayProxyEvent): void => {
   if (!event.body) return;
   try {
-    // eslint-disable-next-line no-param-reassign
-    event.body = JSON.parse(event.body);
+    event.body = JSON.parse(event.body); // eslint-disable-line no-param-reassign
   } catch (err) {
     throw new Error('invalid JSON was provided');
   }

@@ -1,4 +1,4 @@
-import { APIGatewayEventRequestContext } from 'aws-lambda';
+import { APIGatewayEventRequestContext } from 'aws-lambda'; // eslint-disable-line
 
 export interface INormalizedEvent {
   headers: {

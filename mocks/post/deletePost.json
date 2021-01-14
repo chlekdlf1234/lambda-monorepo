@@ -1,0 +1,8 @@
+{
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "test"
+    }
+  },
+  "body": "{\"postId\":\"764e7f5c-8375-40ea-ad52-f272bf3248ac\"}"
+}

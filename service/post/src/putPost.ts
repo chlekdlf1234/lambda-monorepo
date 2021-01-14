@@ -1,3 +1,4 @@
+import { v4 as createId } from 'uuid';
 import dynamoDB from '../../../packages/libs/dynamodb-lib';
 
 interface IParams {
@@ -12,7 +13,7 @@ export default async ({ userId, title, text }: IParams) => {
 
     const postItem = {
       PK: `POST#${userId}`,
-      SK: `POST#${title}#${putTime}`,
+      SK: `POST#${createId()}`,
       point: 0,
       creatorId: `USER#${userId}`,
       title,
@@ -31,6 +32,6 @@ export default async ({ userId, title, text }: IParams) => {
 
     return postItem;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(`PUT POST/${error}`);
   }
 };

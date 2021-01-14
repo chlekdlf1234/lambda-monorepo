@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "invoke-local": "sls invoke local -f $npm_config_handler -p ../../mocks/post/$npm_config_handler.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@lambda/libs": "1.0.0",
+    "@lambda/middlewares": "1.0.0",
     "@middy/core": "^1.5.1",
     "@middy/validator": "^1.5.1",
-    "@lambda/libs": "1.0.0",
-    "@lambda/middlewares": "1.0.0"
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.0"
   }
 }
