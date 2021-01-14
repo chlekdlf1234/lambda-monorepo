@@ -21,8 +21,6 @@ export default async ({ userId, title, text }: IParams) => {
       model: 'post',
       GSI1PK: 'post',
       GSI1SK: putTime,
-      createdAt: putTime,
-      updatedAt: putTime,
     };
 
     await dynamoDB.put({
