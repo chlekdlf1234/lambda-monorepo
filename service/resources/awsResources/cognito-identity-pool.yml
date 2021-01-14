@@ -67,9 +67,3 @@ Resources:
                       - ':'
                       - Ref: AWS::AccountId
                       - ':*'
-
-                
-Outputs:
-  IdentityPoolId:
-    Value:
-      Ref: CognitoIdentityPool

@@ -17,6 +17,7 @@ provider:
     INVERTINDEX: InvertedIndex
     MODELINDEX: ModelIndex
     GSI1INDEX: GSI1Index
+    TABLENAME: ${self:custom.stage}-fullstackToy
 
 custom:
   webpack:
@@ -38,3 +39,11 @@ resources:
   # Cognito
   - ${file(awsResources/cognito-user-pool.yml)}
   - ${file(awsResources/cognito-identity-pool.yml)}
+  # Role
+  - ${file(awsResources/roles.yml)}
+
+  - Outputs:
+      IamRole:
+        Value: 
+          Fn::GetAtt: [ "FullStackToyRole", "Arn" ]
+

@@ -13,9 +13,8 @@ provider:
   runtime: nodejs10.x
   stage: dev
   region: ap-northeast-2
-      
-  role:
-    Fn::GetAtt: [ "FullStackToyRole", "Arn" ]
+  
+  role: ${cf:fullstack-lambda-${self:custom.stage}.IamRole}
 
   environment:
     TABLENAME: ${self:custom.stage}-fullstackToy
@@ -86,5 +85,3 @@ functions:
 resources:
   # GateWay Error
   - ${file(../resources/lambdaResources/api-gateway-error.yml)}
-  # Role
-  - ${file(../resources/lambdaResources/roles.yml)}
