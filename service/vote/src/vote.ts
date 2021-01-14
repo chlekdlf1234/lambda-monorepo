@@ -15,7 +15,7 @@ const updatePostPoint = async ({ userId, postId, upVote, weight }: IUpdateParams
     await dynamoDB.update({
       TableName: process.env.TABLENAME!,
       Key: {
-        PK: `USER#${userId}`,
+        PK: `POST#${userId}`,
         SK: `POST#${postId}`,
       },
       UpdateExpression: 'SET point = point + :incr',
@@ -24,20 +24,20 @@ const updatePostPoint = async ({ userId, postId, upVote, weight }: IUpdateParams
       },
       ReturnValues: 'ALL_NEW',
     });
+  } else {
+    await dynamoDB.update({
+      TableName: process.env.TABLENAME!,
+      Key: {
+        PK: `POST#${userId}`,
+        SK: `POST#${postId}`,
+      },
+      UpdateExpression: 'SET point = point + :incr',
+      ExpressionAttributeValues: {
+        ':incr': -1 * weight,
+      },
+      ReturnValues: 'ALL_NEW',
+    });
   }
-
-  await dynamoDB.update({
-    TableName: process.env.TABLENAME!,
-    Key: {
-      PK: `USER#${userId}`,
-      SK: `POST#${postId}`,
-    },
-    UpdateExpression: 'SET point = point + :incr',
-    ExpressionAttributeValues: {
-      ':incr': -1 * weight,
-    },
-    ReturnValues: 'ALL_NEW',
-  });
 };
 
 export default async ({ userId, postId, upVote }: IParams) => {
@@ -71,8 +71,8 @@ export default async ({ userId, postId, upVote }: IParams) => {
           },
           ReturnValues: 'ALL_NEW',
         });
-        return true;
       }
+
       return true;
     }
 
@@ -92,6 +92,6 @@ export default async ({ userId, postId, upVote }: IParams) => {
 
     return true;
   } catch (error) {
-    throw new Error(`DELTE POST/${error}`);
+    throw new Error(`VOTE/${error}`);
   }
 };

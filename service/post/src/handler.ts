@@ -40,7 +40,7 @@ interface IUpdatePostEvent extends INormalizedEvent {
   };
 }
 
-const updatePostFn = async (event: IUpdatePostEvent) =>
+const updatePostFn = (event: IUpdatePostEvent) =>
   updatePost({
     userId: event.requestContext.identity.cognitoIdentityId!,
     postId: event.body.postId,
@@ -48,30 +48,30 @@ const updatePostFn = async (event: IUpdatePostEvent) =>
     text: event.body.text,
   });
 
-const deletePostFn = async (event: IGetByPostIdEvent) =>
+const deletePostFn = (event: IGetByPostIdEvent) =>
   deletePost({
     userId: event.requestContext.identity.cognitoIdentityId!,
     postId: event.body.postId,
   });
 
-const putPostFn = async (event: IPutEvent) =>
+const putPostFn = (event: IPutEvent) =>
   putPost({
     userId: event.requestContext.identity.cognitoIdentityId!,
     title: event.body.title,
     text: event.body.text,
   });
 
-const getPostByUserFn = async (event: INormalizedEvent) =>
+const getPostByUserFn = (event: INormalizedEvent) =>
   getPostByUser({
     userId: event.requestContext.identity.cognitoIdentityId!,
   });
 
-const getPostByTimeFn = async (event: IGetByTimeEvent) =>
+const getPostByTimeFn = (event: IGetByTimeEvent) =>
   getPostByTime({
     time: event.body.time,
   });
 
-const getPostByPostIdFn = async (event: IGetByPostIdEvent) =>
+const getPostByPostIdFn = (event: IGetByPostIdEvent) =>
   getPostByPostId({
     postId: event.body.postId,
   });

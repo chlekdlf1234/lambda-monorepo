@@ -17,7 +17,7 @@ interface IVoteEvent extends INormalizedEvent {
   };
 }
 
-const voteFn = async (event: IVoteEvent) =>
+const voteFn = (event: IVoteEvent) =>
   vote({
     userId: event.requestContext.identity.cognitoIdentityId!,
     postId: event.body.postId,
