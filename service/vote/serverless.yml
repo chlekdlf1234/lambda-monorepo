@@ -1,0 +1,47 @@
+service: fullstack-lambda-vote
+
+package:
+  individually: true
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-plugin-monorepo
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: ap-northeast-2
+      
+  role: ${cf:fullstack-lambda-${self:custom.stage}.IamRole}
+
+  environment:
+    TABLENAME: ${self:custom.stage}-fullstackToy
+    REGION: ${self:provider.region}
+    INVERTINDEX: InvertedIndex
+    MODELINDEX: ModelIndex
+    GSI1INDEX: GSI1Index
+
+
+custom:
+  webpack:
+    webpackConfig: ../../webpack.config.js
+    includeModules: true
+    forceExclude: 
+      - aws-sdk
+    
+  stage: ${opt:stage, self:provider.stage}
+
+functions:
+  vote:
+    handler: src/vote.default
+    events:
+      - http:
+          path: 'vote'
+          method: post
+          cors: true
+
+resources:
+  # GateWay Error
+  - ${file(../resources/lambdaResources/api-gateway-error.yml)}
