@@ -4,10 +4,16 @@ export default {
     body: {
       type: 'object',
       properties: {
-        postId: { type: 'string' },
         upVote: { type: 'boolean' },
       },
-      required: ['postId', 'upVote'],
+      required: ['upVote'],
+    },
+    pathParameters: {
+      type: 'object',
+      properties: {
+        post_id: { type: 'string' },
+      },
+      required: ['post_id'],
     },
     requestContext: {
       type: 'object',

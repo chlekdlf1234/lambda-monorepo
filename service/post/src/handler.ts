@@ -6,8 +6,8 @@ import buildResponse from '../../../packages/middlewares/buildResponse';
 
 import { INormalizedEvent } from '../../types'; // eslint-disable-line
 
-import getPostByUser from './getPostByUser';
-import getPostByTime from './getPostByTime';
+import getPostsByUser from './getPostsByUser';
+import getPosts from './getPosts';
 import getPostByPostId from './getPostByPostId';
 import putPost from './putPost';
 import deletePost from './deletePost';
@@ -24,7 +24,7 @@ interface IPutEvent extends INormalizedEvent {
 
 interface IGetByTimeEvent extends INormalizedEvent {
   body: {
-    time: string | null;
+    order: string | null;
   };
 }
 interface IGetByPostIdEvent extends INormalizedEvent {
@@ -43,7 +43,7 @@ interface IUpdatePostEvent extends INormalizedEvent {
 const updatePostFn = (event: IUpdatePostEvent) =>
   updatePost({
     userId: event.requestContext.identity.cognitoIdentityId!,
-    postId: event.body.postId,
+    postId: event.pathParameters.post_id,
     title: event.body.title,
     text: event.body.text,
   });
@@ -51,7 +51,7 @@ const updatePostFn = (event: IUpdatePostEvent) =>
 const deletePostFn = (event: IGetByPostIdEvent) =>
   deletePost({
     userId: event.requestContext.identity.cognitoIdentityId!,
-    postId: event.body.postId,
+    postId: event.pathParameters.post_id,
   });
 
 const putPostFn = (event: IPutEvent) =>
@@ -62,18 +62,18 @@ const putPostFn = (event: IPutEvent) =>
   });
 
 const getPostByUserFn = (event: INormalizedEvent) =>
-  getPostByUser({
+  getPostsByUser({
     userId: event.requestContext.identity.cognitoIdentityId!,
   });
 
-const getPostByTimeFn = (event: IGetByTimeEvent) =>
-  getPostByTime({
-    time: event.body.time,
+const getPostsFn = (event: IGetByTimeEvent) =>
+  getPosts({
+    order: event.queryStringParameters ? event.queryStringParameters.order : null,
   });
 
 const getPostByPostIdFn = (event: IGetByPostIdEvent) =>
   getPostByPostId({
-    postId: event.body.postId,
+    postId: event.pathParameters.post_id,
   });
 
 export const updatePostHandler = middy(updatePostFn)
@@ -91,17 +91,17 @@ export const putPostHandler = middy(putPostFn)
   .use(buildResponse())
   .use(validator({ inputSchema: schema.putPostSchema }));
 
-export const getPostByUserHandler = middy(getPostByUserFn)
+export const getPostsByUserHandler = middy(getPostByUserFn)
   .use(buildRequest())
   .use(buildResponse())
-  .use(validator({ inputSchema: schema.getPostByUserSchema }));
+  .use(validator({ inputSchema: schema.getPostsByUserSchema }));
 
-export const getPostByTimeHandler = middy(getPostByTimeFn)
+export const getPostsHandler = middy(getPostsFn)
   .use(buildRequest())
   .use(buildResponse())
-  .use(validator({ inputSchema: schema.getPostByTimeSchema }));
+  .use(validator({ inputSchema: schema.getPostsSchema }));
 
 export const getPostByPostIdHandler = middy(getPostByPostIdFn)
   .use(buildRequest())
   .use(buildResponse())
-  .use(validator({ inputSchema: schema.getPostByPostIdSchema }));
+  .use(validator({ inputSchema: schema.getPostsByPostIdSchema }));

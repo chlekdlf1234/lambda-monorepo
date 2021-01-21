@@ -3,5 +3,6 @@
     "identity": {
       "cognitoIdentityId": "test"
     }
-  }
+  },
+  "pathParameters": {"user_id":"test"}
 }

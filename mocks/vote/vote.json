@@ -4,5 +4,6 @@
       "cognitoIdentityId": "test"
     }
   },
-  "body": "{\"postId\":\"b6ada416-708b-4e50-b04f-f63726e0813d\", \"upVote\":\"false\"}"
+  "body": "{\"upVote\":\"false\"}",
+  "pathParameters": {"post_id":"f6dae058-a180-4dad-bf7a-d76c9409e035"}
 }

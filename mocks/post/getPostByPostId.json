@@ -4,5 +4,5 @@
       "cognitoIdentityId": "test"
     }
   },
-  "body": "{\"postId\":\"d76a2081-8a3b-466b-8773-fb6d0ef310fe\"}"
+  "pathParameters": {"post_id":"795292f6-578c-499c-9344-7a61620d090f"}
 }

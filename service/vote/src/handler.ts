@@ -20,7 +20,7 @@ interface IVoteEvent extends INormalizedEvent {
 const voteFn = (event: IVoteEvent) =>
   vote({
     userId: event.requestContext.identity.cognitoIdentityId!,
-    postId: event.body.postId,
+    postId: event.pathParameters.post_id,
     upVote: event.body.upVote,
   });
 

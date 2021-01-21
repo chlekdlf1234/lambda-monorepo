@@ -4,5 +4,6 @@
       "cognitoIdentityId": "test"
     }
   },
-  "body": "{\"postId\":\"a74ff7ce-c6d9-473d-bfce-15198851c6f0\", \"title\":\"updateTest\", \"text\":\"updateTest\"}"
+  "body": "{\"title\":\"updateTest\", \"text\":\"updateTest\"}",
+  "pathParameters": {"post_id":"795292f6-578c-499c-9344-7a61620d090f", "user_id":"test"}
 }

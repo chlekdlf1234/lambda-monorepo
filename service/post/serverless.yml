@@ -38,7 +38,7 @@ functions:
     handler: src/handler.updatePostHandler
     events:
       - http:
-          path: 'updatePost'
+          path: 'users/{user_id}/posts/{post_id}'
           method: post
           cors: true
 
@@ -46,31 +46,31 @@ functions:
     handler: src/handler.deletePostHandler
     events:
       - http:
-          path: 'deletePost'
-          method: post
+          path: 'users/{user_id}/posts/{post_id}'
+          method: delete
           cors: true
 
   putPost:
     handler: src/handler.putPostHandler
     events:
       - http:
-          path: 'putPost'
-          method: post
+          path: 'users/{user_id}/post'
+          method: put
           cors: true
 
-  getPostByUser:
-    handler: src/handler.getPostByUserHandler
+  getPostsByUser:
+    handler: src/handler.getPostsByUserHandler
     events:
       - http:
-          path: 'getPostByUser'
+          path: 'users/{user_id}/posts'
           method: get
           cors: true
 
-  getPostByTime:
-    handler: src/handler.getPostByTimeHandler
+  getPosts:
+    handler: src/handler.getPostsHandler
     events:
       - http:
-          path: 'getPostByTime'
+          path: 'posts'
           method: get
           cors: true
 
@@ -78,7 +78,7 @@ functions:
     handler: src/handler.getPostByPostIdHandler
     events:
       - http:
-          path: 'getPostByPostId'
+          path: 'posts/{post_id}'
           method: get
           cors: true
 

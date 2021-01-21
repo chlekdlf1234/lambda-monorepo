@@ -38,8 +38,8 @@ functions:
     handler: src/handler.default
     events:
       - http:
-          path: 'vote'
-          method: post
+          path: 'post/{post_id}/vote'
+          method: put
           cors: true
 
 resources:

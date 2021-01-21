@@ -4,11 +4,18 @@ export const updatePostSchema = {
     body: {
       type: 'object',
       properties: {
-        postId: { type: 'string' },
         title: { type: 'string' },
         text: { type: 'string' },
       },
       required: ['postId', 'title', 'text'],
+    },
+    pathParameter: {
+      type: 'object',
+      properties: {
+        user_id: { type: 'string' },
+        post_id: { type: 'string' },
+      },
+      required: ['post_id', 'user_id'],
     },
     requestContext: {
       type: 'object',
@@ -28,12 +35,13 @@ export const updatePostSchema = {
 export const deletePostSchema = {
   type: 'object',
   properties: {
-    body: {
+    pathParameter: {
       type: 'object',
       properties: {
-        postId: { type: 'string' },
+        user_id: { type: 'string' },
+        post_id: { type: 'string' },
       },
-      required: ['postId'],
+      required: ['post_id', 'user_id'],
     },
     requestContext: {
       type: 'object',
@@ -61,6 +69,13 @@ export const putPostSchema = {
       },
       required: ['title', 'text'],
     },
+    pathParameter: {
+      type: 'object',
+      properties: {
+        user_id: { type: 'string' },
+      },
+      required: ['user_id'],
+    },
     requestContext: {
       type: 'object',
       properties: {
@@ -76,7 +91,7 @@ export const putPostSchema = {
   },
 };
 
-export const getPostByUserSchema = {
+export const getPostsByUserSchema = {
   type: 'object',
   properties: {
     requestContext: {
@@ -89,26 +104,33 @@ export const getPostByUserSchema = {
           },
         },
       },
-    },
-  },
-};
-
-export const getPostByTimeSchema = {
-  type: 'object',
-  properties: {
-    body: {
-      type: 'object',
-      properties: {
-        time: { type: 'string' },
+      pathParameter: {
+        type: 'object',
+        properties: {
+          user_id: { type: 'string' },
+        },
+        required: ['user_id'],
       },
     },
   },
 };
 
-export const getPostByPostIdSchema = {
+export const getPostsSchema = {
   type: 'object',
   properties: {
-    body: {
+    pathParameter: {
+      type: 'object',
+      properties: {
+        order: { type: 'string' },
+      },
+    },
+  },
+};
+
+export const getPostsByPostIdSchema = {
+  type: 'object',
+  properties: {
+    pathParameter: {
       type: 'object',
       properties: {
         postId: { type: 'string' },
